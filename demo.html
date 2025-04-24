@@ -1,0 +1,25 @@
+let search = document.getElementById("input-text");
+let btn = document.getElementById("button");
+
+let h1 = document.getElementsByTagName("h1")[0];
+let h2 = document.getElementsByTagName("h2")[0];
+let h3 = document.getElementsByTagName("h3")[0];
+let h4 = document.getElementsByTagName("h4")[0];
+
+async function arpit(city) {
+    let weather = await fetch(`http://api.weatherapi.com/v1/current.json?key=65d1400916ef42d581973318251404&q=${city}&aqi=no`);
+    // let w = await weather.json();
+    // console.log(w); 
+    return await weather.json();
+}
+
+btn.addEventListener("click", async ()=>{
+let place = search.value;
+let w1 = await arpit(place);
+h1.innerText = w1.location.region; 
+h2.innerText = w1.location.country;
+h3.innerText = w1.location.localtime;
+h4.innerText = w1.current.temp_c;
+
+}
+)
